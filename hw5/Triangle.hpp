@@ -63,7 +63,9 @@ public:
             const Vector3f &v1 = vertices[vertexIndex[k * 3 + 1]];
             const Vector3f &v2 = vertices[vertexIndex[k * 3 + 2]];
             float t, u, v;
-            if (rayTriangleIntersect(v0, v1, v2, orig, dir, t, u, v) && t < tnear)
+            if (rayTriangleIntersect(
+                    v0, v1, v2, orig, dir, t, u, v) &&
+                t < tnear)
             {
                 tnear = t;
                 uv.x = u;

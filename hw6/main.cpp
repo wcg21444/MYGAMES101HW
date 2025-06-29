@@ -9,11 +9,12 @@
 // lights) as well as set the options for the render (image width and height,
 // maximum recursion depth, field-of-view, etc.). We then call the render
 // function().
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
-    Scene scene(1280, 960);
+    Scene scene(1920, 1080);
 
-    MeshTriangle bunny("../models/bunny/bunny.obj");
+    MeshTriangle bunny("models/bunny/bunny.obj");
+    // MeshTriangle bunny("models/bunny/cube.obj");
 
     scene.Add(&bunny);
     scene.Add(std::make_unique<Light>(Vector3f(-20, 70, 20), 1));

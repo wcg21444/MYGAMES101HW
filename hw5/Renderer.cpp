@@ -218,8 +218,6 @@ Vector3f castRay(
     return hitColor;
 }
 
-// TODO: 并行计算进度条
-
 std::vector<Vector3f> RenderKernel(const Scene &scene, Vector3f &eye_pos, const size_t n_row, const size_t begin_row, size_t t)
 {
     uint64_t id = std::hash<std::thread::id>{}(std::this_thread::get_id());
@@ -323,7 +321,7 @@ void Renderer::Render(const Scene &scene)
 
     // MultiThread Render
     std::vector<Vector3f> final_framebuffer;
-    const size_t n_thrd = 16;
+    const size_t n_thrd = 1;
     const size_t n_row = scene.height / n_thrd;
 
     std::vector<std::future<std::vector<Vector3f>>> futures_framebuffer;
