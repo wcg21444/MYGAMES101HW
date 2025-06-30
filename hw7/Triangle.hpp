@@ -264,11 +264,13 @@ inline Intersection Triangle::getIntersection(Ray ray)
         return inter;
     t_tmp = dotProduct(e2, qvec) * det_inv;
 
+    if (t_tmp < 0) // 部分区域三角形缺角等渲染不正确的罪魁祸首
+        return inter;
     inter.coords = ray(t_tmp);
     inter.distance = t_tmp;
-    inter.m = this->m;
+    inter.m = m;
     inter.obj = this;
-    inter.normal = this->normal;
+    inter.normal = normal;
     inter.happened = true;
 
     return inter;

@@ -61,7 +61,7 @@ void Renderer::Render(const Scene &scene)
     std::vector<Vector3f> final_framebuffer;
     const size_t n_thrd = 16;
     const size_t n_row = scene.height / n_thrd;
-    const int spp = 8;
+    const int spp = 16;
 
     std::vector<std::future<std::vector<Vector3f>>> futures_framebuffer;
     futures_framebuffer.reserve(n_thrd);
