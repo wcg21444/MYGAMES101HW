@@ -56,11 +56,11 @@ std::vector<Vector3f> RenderKernel(const Scene &scene, Vector3f &eye_pos, const 
 // framebuffer is saved to a file.
 void Renderer::Render(const Scene &scene)
 {
-    Vector3f eye_pos(-1, 5, 6);
+    Vector3f eye_pos(-1, 5, 10);
 
     // MultiThread Render
     std::vector<Vector3f> final_framebuffer;
-    const size_t n_thrd = 8;
+    const size_t n_thrd = 15;
     const size_t n_row = scene.height / n_thrd;
 
     std::vector<std::future<std::vector<Vector3f>>> futures_framebuffer;

@@ -121,33 +121,25 @@ inline bool Bounds3::IntersectP(const Ray &ray, const Vector3f &invDir,
             return false;
     }
 
-    if (std::isinf(tx_far))
+    if (ray.direction.x == 0)
     {
         t_enter = std::max({ty_near, tz_near});
         t_exit = std::min({ty_far, tz_far});
     }
-    else if (std::isinf(ty_far))
+    else if (ray.direction.y == 0)
     {
         t_enter = std::max({tx_near, tz_near});
         t_exit = std::min({tx_far, tz_far});
     }
-    else if (std::isinf(tz_far))
+    else if (ray.direction.z == 0)
     {
         t_enter = std::max({ty_near, tx_near});
         t_exit = std::min({ty_far, tx_far});
     }
-
     else
     {
         t_enter = std::max({tx_near, ty_near, tz_near});
         t_exit = std::min({tx_far, ty_far, tz_far});
-    }
-
-    if (ray.direction.x == 0 ||
-        ray.direction.y == 0 ||
-        ray.direction.z == 0)
-    {
-        std::cout << "";
     }
 
     return t_enter <= t_exit && t_exit >= 0;

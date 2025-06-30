@@ -121,22 +121,16 @@ Intersection BVHAccel::getIntersection(BVHBuildNode *node, const Ray &ray, int d
     {
 
         auto intersec = node->object->getIntersection(ray);
-        if (intersec.happened)
-        {
-            std::cout << "";
-        }
         return intersec;
     }
 
     Intersection inter_left, inter_right;
     if (node->left != nullptr)
     {
-        // std::cout << "left" << std::endl;
         inter_left = getIntersection(node->left, ray, depth + 1);
     }
     if (node->right != nullptr)
     {
-        // std::cout << "right" << std::endl;
         inter_right = getIntersection(node->right, ray, depth + 1);
     }
     // 左右子树最终得命中三角形
