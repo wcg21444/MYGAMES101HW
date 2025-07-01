@@ -4,6 +4,7 @@
 #include "Sphere.hpp"
 #include "Vector.hpp"
 #include "global.hpp"
+#include "Settings.hpp"
 #include <chrono>
 
 // In the main function of the program, we create the scene (create objects and
@@ -12,9 +13,9 @@
 // function().
 int main(int argc, char **argv)
 {
-
+    Settings::loadSettings("settings.json");
     // Change the definition here to change resolution
-    Scene scene(256, 256);
+    Scene scene(Settings::width, Settings::height);
 
     Material *red = new Material(DIFFUSE, Vector3f(0.0f));
     red->Kd = Vector3f(0.63f, 0.065f, 0.05f);

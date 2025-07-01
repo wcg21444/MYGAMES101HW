@@ -5,6 +5,7 @@
 #include <fstream>
 #include "Scene.hpp"
 #include "Renderer.hpp"
+#include "Settings.hpp"
 
 #include <future>
 #include <thread>
@@ -59,16 +60,15 @@ void Renderer::Render(const Scene &scene)
 
     // MultiThread Render
     std::vector<Vector3f> final_framebuffer;
-    const size_t n_thrd = 16;
+    const size_t n_thrd = Settings::n_thrd;
     const size_t n_row = scene.height / n_thrd;
-    const int spp = 16;
 
     std::vector<std::future<std::vector<Vector3f>>> futures_framebuffer;
     futures_framebuffer.reserve(n_thrd);
     for (size_t t = 0; t < n_thrd; t++)
     {
-        futures_framebuffer.emplace_back(std::async(std::launch::async, [&scene, &eye_pos, n_row, spp, t]() -> std::vector<Vector3f>
-                                                    { return RenderKernel(scene, eye_pos, n_row, n_row * t, spp, t); }));
+        futures_framebuffer.emplace_back(std::async(std::launch::async, [&scene, &eye_pos, n_row, t]() -> std::vector<Vector3f>
+                                                    { return RenderKernel(scene, eye_pos, n_row, n_row * t, Settings::spp, t); }));
     }
     std::atomic<int> completed{0};
     for (size_t t = 0; t < n_thrd; t++)
